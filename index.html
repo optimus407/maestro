@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facturación Electrónica Paraguay</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Facturación Electrónica · Paraguay</h1>
+      <p>Generador de factura electrónica (demo) con cálculo de IVA 10%, 5% y exento.</p>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>Datos de la factura</h2>
+        <div class="grid two-cols">
+          <label>
+            Fecha
+            <input id="fecha" type="date" />
+          </label>
+          <label>
+            Moneda
+            <select id="moneda">
+              <option value="PYG">PYG</option>
+              <option value="USD">USD</option>
+            </select>
+          </label>
+          <label>
+            Timbrado
+            <input id="timbrado" type="text" placeholder="12345678" />
+          </label>
+          <label>
+            Establecimiento
+            <input id="establecimiento" type="text" placeholder="001" />
+          </label>
+          <label>
+            Punto de expedición
+            <input id="puntoExpedicion" type="text" placeholder="001" />
+          </label>
+          <label>
+            Número
+            <input id="numero" type="text" placeholder="0000001" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Emisor</h2>
+        <div class="grid two-cols">
+          <label>
+            Razón social
+            <input id="emisorNombre" type="text" placeholder="Mi Empresa S.A." />
+          </label>
+          <label>
+            RUC
+            <input id="emisorRuc" type="text" placeholder="80012345-6" />
+          </label>
+          <label class="full-width">
+            Dirección
+            <input id="emisorDireccion" type="text" placeholder="Asunción, Paraguay" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Receptor</h2>
+        <div class="grid two-cols">
+          <label>
+            Razón social
+            <input id="receptorNombre" type="text" placeholder="Cliente S.R.L." />
+          </label>
+          <label>
+            RUC / CI
+            <input id="receptorRuc" type="text" placeholder="1234567-8" />
+          </label>
+          <label class="full-width">
+            Dirección
+            <input id="receptorDireccion" type="text" placeholder="Ciudad del Este, Paraguay" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="items-header">
+          <h2>Ítems</h2>
+          <button id="agregarItem" type="button">+ Agregar ítem</button>
+        </div>
+        <div class="items-wrapper">
+          <table id="tablaItems">
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Cant.</th>
+                <th>Precio</th>
+                <th>IVA</th>
+                <th>Subtotal</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card summary">
+        <h2>Resumen</h2>
+        <div class="totals">
+          <p><span>Subtotal gravado 10%</span><strong id="total10">₲ 0</strong></p>
+          <p><span>Subtotal gravado 5%</span><strong id="total5">₲ 0</strong></p>
+          <p><span>Exento</span><strong id="totalExento">₲ 0</strong></p>
+          <p><span>IVA 10%</span><strong id="iva10">₲ 0</strong></p>
+          <p><span>IVA 5%</span><strong id="iva5">₲ 0</strong></p>
+          <p class="grand"><span>Total factura</span><strong id="totalFactura">₲ 0</strong></p>
+        </div>
+        <div class="actions">
+          <button id="guardar" type="button">Guardar borrador</button>
+          <button id="cargar" type="button">Cargar borrador</button>
+          <button id="exportar" type="button">Exportar JSON</button>
+          <button id="imprimir" type="button">Imprimir</button>
+        </div>
+        <small>
+          Esta app es una plantilla educativa. Para producción debes integrar la API/SIFEN oficial de la DNIT.
+        </small>
+      </section>
+    </main>
+
+    <template id="itemTemplate">
+      <tr>
+        <td><input class="descripcion" type="text" placeholder="Producto/Servicio" /></td>
+        <td><input class="cantidad" type="number" min="0" step="0.01" value="1" /></td>
+        <td><input class="precio" type="number" min="0" step="0.01" value="0" /></td>
+        <td>
+          <select class="iva">
+            <option value="10">10%</option>
+            <option value="5">5%</option>
+            <option value="0">Exento</option>
+          </select>
+        </td>
+        <td class="subtotal">₲ 0</td>
+        <td><button class="eliminar" type="button">Eliminar</button></td>
+      </tr>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
